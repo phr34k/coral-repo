@@ -49,6 +49,8 @@ After boost is installed you can now run scons to build the library. From the co
 ```
 scons -c -f buildStandalone.py target=x86 mode=release msvc=10.0
 scons -f buildStandalone.py target=x86 mode=release msvc=10.0
+scons -f buildStandalone.py target=x86 mode=release msvc=10.0 build-sdk=1
+scons -f buildStandalone.py target=x86 mode=release msvc=10.0 build-sdk=1 sdk-install-dir=install
 ```
 
 ## Contributors
