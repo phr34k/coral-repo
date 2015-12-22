@@ -37,33 +37,7 @@
 #include "../src/PythonDataCollector.h"
 #include "../tests/coralTests.h"
 
-#include "networkManagerWrapper.h"
-#include "nodeWrapper.h"
-#include "objectWrapper.h"
-#include "nestedObjectWrapper.h"
 #include "attributeWrapper.h"
-#include "numericNodesWrapper.h"
-#include "passThroughAttributeWrapper.h"
-#include "valueWrapper.h"
-#include "imageNodeWrapper.h"
-#include "geoWrapper.h"
-#include "commandWrapper.h"
-#include "objImporterNodeWrapper.h"
-#include "stringWrapper.h"
-#include "geoGridNodeWrapper.h"
-#include "geoSphereNodeWrapper.h"
-#include "geoCubeNodeWrapper.h"
-#include "errorObjectWrapper.h"
-#include "boolWrapper.h"
-#include "conditionalNodesWrapper.h"
-#include "mathNodesWrapper.h"
-#include "splineNodesWrapper.h"
-#include "coralIOWrapper.h"
-#include "loopNodesWrapper.h"
-#include "enumWrapper.h"
-#include "processSimulationNodeWrapper.h"
-#include "deformerNodesWrapper.h"
-#include "../builtinNodes/KdNodes.h"
 
 using namespace coral;
 
@@ -94,34 +68,6 @@ BOOST_PYTHON_MODULE(_coral)
 {
 	boost::python::def("setCallback", coral_setCallback);
 	boost::python::def("runTests", coralTests::run);
-	
-	objectWrapper();
-	valueWrapper();
-	nestedObjectWrapper();
-	attributeWrapper();
-	nodeWrapper();
-	networkManagerWrapper();
-	loopNodesWrapper();
-	numericNodesWrapper();
-	mathNodesWrapper();
-	passThroughAttributeWrapper();
-	imageNodeWrapper();
-	geoWrapper();
-	commandWrapper();
-	objImporterNodeWrapper();
-	stringWrapper();
-	geoGridNodeWrapper();
-	geoSphereNodeWrapper();
-	geoCubeNodeWrapper();
-	errorObjectWrapper();
-	boolWrapper();
-	conditionalNodesWrapper();
-	splineNodesWrapper();
-	coralIOWrapper();
-	enumWrapper();
-	processSimulationNodeWrapper();
-	deformerNodesWrapper();
-	pythonWrapperUtils::pythonWrapper<FindPointsInRange, Node>("FindPointsInRange");
 	
 	boost::python::to_python_converter<std::vector<std::string>, pythonWrapperUtils::stdVectorToPythonList<std::string> >();
 	boost::python::to_python_converter<std::vector<Node*>, ObjectVectorToPythonList<Node> >();

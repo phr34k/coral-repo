@@ -26,11 +26,6 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // </license>
 
-#include <GL/glew.h>
-#ifdef CORAL_PARALLEL_TBB
-	#include <tbb/mutex.h>
-#endif
-
 #include <coral/src/NetworkManager.h>
 #include <coral/src/Attribute.h>
 #include <coral/src/containerUtils.h>
@@ -40,77 +35,31 @@
 using namespace coral;
 using namespace coralUi;
 
-namespace {
-	#ifdef CORAL_PARALLEL_TBB
-		tbb::mutex _globalMutex;
-	#endif
-
-	std::vector<DrawNode*> _drawNodes;
-	bool _renderScheduled = false;
-	bool _initialized = false;
-}
-
-void(*MainDrawRoutine::_viewportRefreshCallback)(void) = 0;
-
 void MainDrawRoutine::init(){
-	if(!_initialized){
-		glewExperimental = GL_TRUE;
-		GLenum glewInitResult = glewInit();
-		if(glewInitResult != GLEW_OK){
-		    std::cout << "Impossible to init GLEW: " << glewGetErrorString(glewInitResult) << std::endl;
-		    return;
-		}
 
-		_initialized = true;
-
-		for(std::vector<DrawNode*>::const_iterator itDrawNode = _drawNodes.begin(); itDrawNode != _drawNodes.end(); ++itDrawNode){
-			(*itDrawNode)->initGL();
-		}
-	}
 }
 
 bool MainDrawRoutine::initialized(){
-	return _initialized;
+	return true;
 }
 
 void MainDrawRoutine::addDrawNode(DrawNode *drawNode){
-	if(!containerUtils::elementInContainer(drawNode, _drawNodes)){
-		_drawNodes.push_back(drawNode);
-	}
+
 }
 
 void MainDrawRoutine::removeDrawNode(DrawNode *drawNode){
-	containerUtils::eraseElementInContainer(drawNode, _drawNodes);
-	
-	//scheduleRender();
+
 }
 
 void MainDrawRoutine::drawAll(){
-	_renderScheduled = false;
-	if(_initialized){
-		for(std::vector<DrawNode*>::const_iterator itDrawNode = _drawNodes.begin(); itDrawNode != _drawNodes.end(); ++itDrawNode){
-			(*itDrawNode)->draw();
-		}
-	}
+
 }
 
 void MainDrawRoutine::dirtyingDoneCallback(Attribute *attribute){
-	if(_viewportRefreshCallback){
-		_renderScheduled = false;
-		_viewportRefreshCallback();
-	}
+
 }
 
 void MainDrawRoutine::scheduleRender(){
-	if(_initialized){
-		if(!_renderScheduled){
-			#ifdef CORAL_PARALLEL_TBB
-				tbb::mutex::scoped_lock lock(_globalMutex);
-			#endif
-			_renderScheduled = true;
-			
-			Attribute::queueDirtyingDoneCallback(&MainDrawRoutine::dirtyingDoneCallback);
-		}
-	}
+
 }
 

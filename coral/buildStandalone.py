@@ -35,7 +35,6 @@ import compileall
 import sconsUtils
 
 sconsUtils.importBuildEnvs()
-
 os.environ["CORAL_BUILD_MODE"] = "DEBUG"
 if ARGUMENTS.get("mode", 0) == "release":
     print "* Building standalone app in release mode"
@@ -44,7 +43,6 @@ else:
     print "* Building standalone dev tree in debug mode"
 
 buildMode = os.environ["CORAL_BUILD_MODE"]
-
 installDir = ARGUMENTS.get("install-dir", 0)
 
 if not installDir:
@@ -69,7 +67,6 @@ if buildSdk:
 
 coralLib = SConscript(os.path.join("coral", "SConstruct"))
 coralUiLib = SConscript(os.path.join("coralUi", "SConstruct"), exports = {"coralLib": coralLib})
-imathLib = SConscript(os.path.join("imath", "SConstruct"))
 
 def buildSdkHeaders(buildDir):
     coralIncludesDir = os.path.join(buildDir, "coral", "includes", "coral")
@@ -104,12 +101,12 @@ def buildSdkHeaders(buildDir):
 def buildSdkLibs(coralLib, coralUiLib, buildDir):
     coralLibsDir = os.path.join(buildDir, "coral", "libs")
     coralUiLibsDir = os.path.join(buildDir, "coralUi", "libs")
-    imathLibsDir = os.path.join(buildDir, "Imath", "libs")
+    # imathLibsDir = os.path.join(buildDir, "Imath", "libs")
     boostLibsDir = os.path.join(buildDir, "boost", "libs")
     
     os.makedirs(coralLibsDir)
     os.makedirs(coralUiLibsDir)
-    os.makedirs(imathLibsDir)
+    # os.makedirs(imathLibsDir)
     os.makedirs(boostLibsDir)
     
     targetCoralLibName = str(SharedLibrary("coral")[0])
@@ -121,21 +118,21 @@ def buildSdkLibs(coralLib, coralUiLib, buildDir):
     os.symlink(os.path.join(os.pardir, os.pardir, os.pardir, "coral", sourceCoralLibName), os.path.join(coralLibsDir, targetCoralLibName))
     os.symlink(os.path.join(os.pardir, os.pardir, os.pardir, "coral", "coralUi", sourceCoralUiLibName), os.path.join(coralUiLibsDir, targetCoralUiLibName))
     
-    ImathLibName = str(SharedLibrary(sconsUtils.getEnvVar("CORAL_IMATH_LIB"))[0])
+    # ImathLibName = str(SharedLibrary(sconsUtils.getEnvVar("CORAL_IMATH_LIB"))[0])
     ImathIexLibName = str(SharedLibrary(sconsUtils.getEnvVar("CORAL_IMATH_IEX_LIB"))[0])
     boostPythonLibName = str(SharedLibrary(sconsUtils.getEnvVar("CORAL_BOOST_PYTHON_LIB"))[0])
     
-    ImathLib = os.path.join(sconsUtils.getEnvVar("CORAL_IMATH_LIBS_PATH"), ImathLibName)
-    ImathIexLib = os.path.join(sconsUtils.getEnvVar("CORAL_IMATH_LIBS_PATH"), ImathIexLibName)
+    # ImathLib = os.path.join(sconsUtils.getEnvVar("CORAL_IMATH_LIBS_PATH"), ImathLibName)
+    # ImathIexLib = os.path.join(sconsUtils.getEnvVar("CORAL_IMATH_LIBS_PATH"), ImathIexLibName)
     boostPythonLib = os.path.join(sconsUtils.getEnvVar("CORAL_BOOST_LIBS_PATH"), boostPythonLibName)
 
-    shutil.copy(ImathLib, imathLibsDir)
-    shutil.copy(ImathIexLib, imathLibsDir)
+    # shutil.copy(ImathLib, imathLibsDir)
+    # shutil.copy(ImathIexLib, imathLibsDir)
     shutil.copy(boostPythonLib, boostLibsDir)
     
     if sys.platform == "darwin":
-        sconsUtils.autoFixDynamicLinks(os.path.join(imathLibsDir, ImathLibName))
-        sconsUtils.autoFixDynamicLinks(os.path.join(imathLibsDir, ImathIexLibName))
+        # sconsUtils.autoFixDynamicLinks(os.path.join(imathLibsDir, ImathLibName))
+        # sconsUtils.autoFixDynamicLinks(os.path.join(imathLibsDir, ImathIexLibName))
         sconsUtils.autoFixDynamicLinks(os.path.join(boostLibsDir, boostPythonLibName))
 
 def buildSdkTree(coralLib, coralUiLib, buildDir):
@@ -145,17 +142,17 @@ def buildSdkTree(coralLib, coralUiLib, buildDir):
     buildSdkHeaders(buildDir)
     buildSdkLibs(coralLib, coralUiLib, buildDir)
 
-def buildMainTree(coralLib, coralUiLib, imathLib, buildDir):
+def buildMainTree(coralLib, coralUiLib, buildDir):
     if sys.platform == "darwin":
         # fix lib link path on Mac Os X
         sconsUtils.autoFixDynamicLinks(coralLib)
         sconsUtils.autoFixDynamicLinks(coralUiLib)
-        sconsUtils.autoFixDynamicLinks(imathLib)
+        # sconsUtils.autoFixDynamicLinks(imathLib)
     
     shutil.copytree(os.path.join("coral", "py"), buildDir)
     shutil.copy(coralLib, os.path.join(buildDir, "coral"))
     
-    shutil.copy(imathLib, buildDir)
+    # shutil.copy(imathLib, buildDir)
     
     shutil.copytree(os.path.join("coralUi", "py", "coralUi"), os.path.join(buildDir, "coral", "coralUi"))
     shutil.copy(coralUiLib, os.path.join(buildDir, "coral", "coralUi"))
@@ -169,13 +166,12 @@ def buildMainTree(coralLib, coralUiLib, imathLib, buildDir):
     if buildSdk:
        buildSdkTree(coralLib, coralUiLib, sdkInstallDir)
 
-def buildDevTree(coralLib, coralUiLib, imathLib):
+def buildDevTree(coralLib, coralUiLib):
     shutil.rmtree(installDir, ignore_errors = True)
     
-    buildMainTree(coralLib, coralUiLib, imathLib, installDir)
-    
-    
-def buildOsXApp(coralLib, coralUiLib, imathLib):
+    buildMainTree(coralLib, coralUiLib, installDir)
+        
+def buildOsXApp(coralLib, coralUiLib):
     print "* building app bundle"
     
     # clean
@@ -197,7 +193,7 @@ def buildOsXApp(coralLib, coralUiLib, imathLib):
     global sdkInstallDir
     sdkInstallDir = os.path.join(contentsDir, "sdk")
 
-    buildMainTree(coralLib, coralUiLib, imathLib, os.path.join(contentsDir, "coral"))
+    buildMainTree(coralLib, coralUiLib, os.path.join(contentsDir, "coral"))
     
     # copy stuff over
     shutil.copy(os.path.join("resources", "macAppBundle", "Info.plist"), contentsDir)
@@ -260,23 +256,19 @@ def buildOsXApp(coralLib, coralUiLib, imathLib):
     for lib in libs:
         sconsUtils.autoFixDynamicLinks(lib)
     
-def buildApp(coralLib, coralUiLib, imathLib):
+def buildApp(coralLib, coralUiLib):
     if sys.platform == "darwin":
-        buildOsXApp(coralLib, coralUiLib, imathLib)
+        buildOsXApp(coralLib, coralUiLib)
 
 def postBuildAction(target, source, env):
     coralLib = str(source[0])
     coralUiLib = str(source[1])
-    imathLib = str(source[2])
     
     if buildMode == "RELEASE":
-        buildApp(coralLib, coralUiLib, imathLib)
+        buildApp(coralLib, coralUiLib)
     else:
-        buildDevTree(coralLib, coralUiLib, imathLib)
+        buildDevTree(coralLib, coralUiLib)
 
-postBuildTarget = Command("postBuildTarget", [coralLib[0], coralUiLib[0], imathLib[0]], postBuildAction)
+postBuildTarget = Command("postBuildTarget", [coralLib[0], coralUiLib[0]], postBuildAction)
 Default(postBuildTarget)
-
-
-    
 

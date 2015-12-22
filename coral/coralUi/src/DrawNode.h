@@ -43,19 +43,12 @@ namespace coralUi{
 	
 class ViewportOutputAttribute;
 
-//! Base class to nodes willing to draw OpenGL content in the viewport.
 class CORALUI_EXPORT DrawNode : public coral::Node{
 public:
 	DrawNode(const std::string &name, coral::Node *parent);
-	void deleteIt();
-
 	virtual void draw();
-	virtual void initGL();
 	virtual void attributeDirtied(coral::Attribute *attribute);
 	virtual void attributeConnectionChanged(coral::Attribute *attribute);
-	virtual void drawSlice(unsigned int slice);
-	
-	bool glContextExists();
 };
 
 }

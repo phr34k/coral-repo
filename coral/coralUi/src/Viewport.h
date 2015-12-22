@@ -30,44 +30,29 @@
 #ifndef VIEWPORT_H
 #define VIEWPORT_H
 
-#include <ImathMatrix.h>
-
 namespace coralUi{
 
-class Viewport{
-public:
-	Viewport();
-	~Viewport();
+	class Viewport{
+	public:
+		Viewport();
+		~Viewport();
 
-	void initializeGL();
-	void resizeGL(int width, int height);
-	void draw();
-	void orbit(int deltaSide, int deltaUp);
-	void pan(int deltaSide, int deltaUp);
-	void dolly(int deltaSide);
-	void zoom(int deltaSide);
-	void roll(int deltaSide);
-	Imath::M44f modelMatrix();
-	float fov();
-	float zNear();
-	float zFar();
-	void setGridVisible(bool value);
+		void initializeGL();
+		void resizeGL(int width, int height);
+		void draw();
+		void orbit(int deltaSide, int deltaUp);
+		void pan(int deltaSide, int deltaUp);
+		void dolly(int deltaSide);
+		void zoom(int deltaSide);
+		void roll(int deltaSide);
+		void setGridVisible(bool value);
 
-private:
-	void prepareForDrawing();
-	void setupProjection();
-	void drawGrid();
-	void drawAxis();
-	
-	Imath::V3f _target;
-	Imath::M44f _modelMatrix;
-	float _projectionMatrix[16];
-	float _fov, _roll, _zNear, _zFar;
-	int _width, _height;
-	bool _initialized;
-	bool _isProjDirty;
-	bool _gridVisible;
-};
+	private:
+		void prepareForDrawing();
+		void setupProjection();
+		void drawGrid();
+		void drawAxis();
+	};
 
 }
 

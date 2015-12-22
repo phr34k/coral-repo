@@ -34,55 +34,14 @@ using namespace coral;
 using namespace coralUi;
 
 DrawNode::DrawNode(const std::string &name, Node *parent) : Node(name, parent){	
-	setUpdateEnabled(false);
-	
-	MainDrawRoutine::addDrawNode(this);
-}
-
-void DrawNode::deleteIt(){
-	MainDrawRoutine::removeDrawNode(this);
-	Node::deleteIt();
-	
-	MainDrawRoutine::_viewportRefreshCallback();
 }
 
 void DrawNode::draw(){
-	Node *slicer_ = slicer();
-	if(slicer_){
-		unsigned int slices_ = slicer_->computeSlices();
 
-		if(slices_ != slices()){
-			resizedSlices(slices_);
-		}
-
-		for(int i = 0; i < slices_; ++i){
-			drawSlice(i);
-		}
-	}
-	else{
-		drawSlice(0);
-	}
 }
-
-void DrawNode::drawSlice(unsigned int slice){
-}
-
-bool DrawNode::glContextExists(){
-	return MainDrawRoutine::initialized();
-}
-
-void DrawNode::initGL(){
-	const std::vector<Attribute*> inputs = inputAttributes();
-	for(int i = 0; i < inputs.size(); ++i){
-		catchAttributeDirtied(inputs[i]);
-	}
-}
-
 void DrawNode::attributeDirtied(Attribute *attribute){
-	MainDrawRoutine::scheduleRender();
 }
 
 void DrawNode::attributeConnectionChanged(Attribute *attribute){
-	MainDrawRoutine::_viewportRefreshCallback();
 }
 

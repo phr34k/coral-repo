@@ -40,19 +40,6 @@ using namespace coralUi;
 
 void viewportWrapper(){
 	boost::python::class_<Viewport>("Viewport")
-		.def("initializeGL", &Viewport::initializeGL)
-		.def("resizeGL", &Viewport::resizeGL)
-		.def("draw", &Viewport::draw)
-		.def("orbit", &Viewport::orbit)
-		.def("zoom", &Viewport::zoom)
-		.def("pan", &Viewport::pan)
-		.def("roll", &Viewport::roll)
-		.def("dolly", &Viewport::dolly)
-		.def("modelMatrix", &Viewport::modelMatrix)
-		.def("fov", &Viewport::fov)
-		.def("zNear", &Viewport::zNear)
-		.def("zFar", &Viewport::zFar)
-		.def("setGridVisible", &Viewport::setGridVisible)
 		;
 }
 

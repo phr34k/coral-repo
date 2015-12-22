@@ -67,7 +67,7 @@ def buildEnv():
         sconsUtils.getEnvVar("CORAL_BOOST_LIBS_PATH")])
     
     env["SHLIBPREFIX"] = ""
-    env["TARGET_ARCH"] = platform.machine()
+    env["TARGET_ARCH"] = "x86"
     
     if sys.platform.startswith("linux"):
         pass
