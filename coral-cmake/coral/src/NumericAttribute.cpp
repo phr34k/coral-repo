@@ -83,6 +83,7 @@ Numeric::Type NumericAttribute::numericTypeFromString(const std::string &typeStr
 	else if(typeStr == "FloatArray"){
 		type = Numeric::numericTypeFloatArray;
 	}
+    /*
 	else if(typeStr == "Vec3"){
 		type = Numeric::numericTypeVec3;
 	}
@@ -107,6 +108,7 @@ Numeric::Type NumericAttribute::numericTypeFromString(const std::string &typeStr
 	else if(typeStr == "Matrix44Array"){
 		type = Numeric::numericTypeMatrix44Array;
 	}
+    */
 	
 	return type;
 }

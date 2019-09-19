@@ -49,10 +49,6 @@ private:
 	NumericAttribute *_element;
 	NumericAttribute *_length;
 	void(Length::*_selectedOperation)(Numeric*, Numeric*, unsigned int);
-
-	void updateVec3(Numeric *element, Numeric *length, unsigned int slice);
-	void updateQuat(Numeric *element, Numeric *length, unsigned int slice);
-
 };
 
 class Inverse: public Node{
@@ -323,9 +319,6 @@ private:
 	NumericAttribute *_element;
 	NumericAttribute *_negated;
 	void(Negate::*_selectedOperation)(Numeric*, Numeric*, unsigned int);
-
-	void updateVec3(Numeric *element, Numeric *negated, unsigned int slice);
-	void updateMatrix44(Numeric *element, Numeric *negated, unsigned int slice);
 };
 
 }

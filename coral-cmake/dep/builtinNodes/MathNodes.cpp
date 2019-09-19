@@ -96,38 +96,14 @@ void Length::attributeSpecializationChanged(Attribute *attribute){
 	
 	Numeric::Type type = _element->outValue()->type();
 	
+    /*
 	if(type == Numeric::numericTypeVec3 || type == Numeric::numericTypeVec3Array){
 		_selectedOperation = &Length::updateVec3;
 	}
 	else if(type == Numeric::numericTypeQuat || type == Numeric::numericTypeQuatArray){
 		_selectedOperation = &Length::updateQuat;
 	}
-}
-
-void Length::updateVec3(Numeric *element, Numeric *length, unsigned int slice){
-	const std::vector<Imath::V3f> &elementValues = element->vec3ValuesSlice(slice);
-	unsigned int size = elementValues.size();
-
-	std::vector<float> lengthValues(size);
-	for(int i = 0; i < size; ++i){
-		float lengthValue = elementValues[i].length();
-		lengthValues[i] = lengthValue;
-	}
-
-	length->setFloatValuesSlice(slice, lengthValues);
-}
-
-void Length::updateQuat(Numeric *element, Numeric *length, unsigned int slice){
-	const std::vector<Imath::Quatf> &elementValues = element->quatValuesSlice(slice);
-	unsigned int size = elementValues.size();
-
-	std::vector<float> lengthValues(size);
-	for(int i = 0; i < size; ++i){
-		float lengthValue = elementValues[i].length();
-		lengthValues[i] = lengthValue;
-	}
-
-	length->setFloatValuesSlice(slice, lengthValues);
+    */
 }
 
 void Length::updateSlice(Attribute *attribute, unsigned int slice){
@@ -166,12 +142,14 @@ void Inverse::attributeSpecializationChanged(Attribute *attribute){
 	
 	Numeric::Type type = _element->outValue()->type();
 	
+    /*
 	if(type == Numeric::numericTypeMatrix44 || type == Numeric::numericTypeMatrix44Array){
 		_selectedOperation = &Inverse::updateMatrix44;
 	}
 	else if(type == Numeric::numericTypeQuat || type == Numeric::numericTypeQuatArray){
 		_selectedOperation = &Inverse::updateQuat;
 	}
+    */
 }
 
 void Inverse::updateMatrix44(Numeric *element, Numeric *inverse, unsigned int slice){
@@ -356,12 +334,14 @@ void DotProduct::attributeSpecializationChanged(Attribute *attribute){
 
 	Numeric::Type type = _dotProduct->outValue()->type();
 	
+    /*
 	if(type == Numeric::numericTypeVec3 || type == Numeric::numericTypeVec3Array){
 		_selectedOperation = &DotProduct::updateVec3;
 	}
 	else if(type == Numeric::numericTypeQuat || type == Numeric::numericTypeQuatArray){
 		_selectedOperation = &DotProduct::updateQuat;
 	}
+    */
 }
 
 void DotProduct::updateVec3(Numeric *element0, Numeric *element1, Numeric *dotProduct, unsigned int slice){
@@ -459,12 +439,14 @@ void Normalize::attributeSpecializationChanged(Attribute *attribute){
 	_selectedOperation = 0;
 
 	Numeric::Type type = _element->outValue()->type();
+    /*
 	if(type == Numeric::numericTypeVec3 || type == Numeric::numericTypeVec3Array){
 		_selectedOperation = &Normalize::updateVec3;
 	}
 	else if(type == Numeric::numericTypeQuat || type == Numeric::numericTypeQuatArray){
 		_selectedOperation = &Normalize::updateQuat;
 	}
+    */
 }
 
 void Normalize::updateVec3(Numeric *element, Numeric *normalized, unsigned int slice){
@@ -1148,9 +1130,11 @@ void Average::attributeSpecializationChanged(Attribute *attribute){
 	else if( type == Numeric::numericTypeFloatArray){
 		_selectedOperation = &Average::average_float;
 	}
+    /*
 	else if( type == Numeric::numericTypeVec3Array){
 		_selectedOperation = &Average::average_vec3;
 	}
+    */
 }
 
 void Average::average_int(Numeric *inNumber, Numeric *outNumber, unsigned int slice){
@@ -1346,6 +1330,7 @@ void Slerp::updateSpecializationLink(Attribute *attributeA, Attribute *attribute
 }
 
 void Slerp::updateSlice(Attribute *attribute, unsigned int slice){
+    /*
 	const std::vector<Imath::Quatf> &q1 = _inQuat1->value()->quatValuesSlice(slice);
 	const std::vector<Imath::Quatf> &q2 = _inQuat2->value()->quatValuesSlice(slice);
 	const std::vector<float> &t = _param->value()->floatValuesSlice(slice);
@@ -1359,6 +1344,7 @@ void Slerp::updateSlice(Attribute *attribute, unsigned int slice){
 	}
 
 	_outNumber->outValue()->setQuatValues(outValues);
+    */
 }
 
 QuatMultiply::QuatMultiply(const std::string &name, Node *parent): Node(name, parent){
@@ -1387,6 +1373,7 @@ QuatMultiply::QuatMultiply(const std::string &name, Node *parent): Node(name, pa
 }
 
 void QuatMultiply::updateSlice(Attribute *attribute, unsigned int slice){
+    /*
 	const std::vector<Imath::Quatf> &q0 = _quat0->value()->quatValuesSlice(slice);
 	const std::vector<Imath::Quatf> &q1 = _quat1->value()->quatValuesSlice(slice);
 
@@ -1405,6 +1392,7 @@ void QuatMultiply::updateSlice(Attribute *attribute, unsigned int slice){
 	}
 
 	_outQuat->outValue()->setQuatValues(outValues);
+    */
 }
 
 Negate::Negate(const std::string &name, Node *parent): 
@@ -1437,12 +1425,14 @@ void Negate::attributeSpecializationChanged(Attribute *attribute){
 	
 	Numeric::Type type = _element->outValue()->type();
 	
+    /*
 	if(type == Numeric::numericTypeVec3 || type == Numeric::numericTypeVec3Array){
 		_selectedOperation = &Negate::updateVec3;
 	}
 	else if(type == Numeric::numericTypeMatrix44 || type == Numeric::numericTypeMatrix44Array){
 		_selectedOperation = &Negate::updateMatrix44;
 	}
+    */
 }
 
 void Negate::updateVec3(Numeric *element, Numeric *negated, unsigned int slice){

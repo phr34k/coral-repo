@@ -22,9 +22,6 @@ private:
 
 	void updateInt(unsigned int slice, Numeric *globalArray, Numeric *localElement);
 	void updateFloat(unsigned int slice, Numeric *globalArray, Numeric *localElement);
-	void updateVec3(unsigned int slice, Numeric *globalArray, Numeric *localElement);
-	void updateCol4(unsigned int slice, Numeric *globalArray, Numeric *localElement);
-	void updateMatrix44(unsigned int slice, Numeric *globalArray, Numeric *localElement);
 };
 
 class LoopOutputNode: public Node{
@@ -41,9 +38,6 @@ private:
 	
 	void updateInt(unsigned int slices, Numeric *element, Numeric *array);
 	void updateFloat(unsigned int slices, Numeric *element, Numeric *array);
-	void updateVec3(unsigned int slices, Numeric *element, Numeric *array);
-	void updateCol4(unsigned int slices, Numeric *element, Numeric *array);
-	void updateMatrix44(unsigned int slices, Numeric *element, Numeric *array);
 };
 
 class ForLoopNode: public Node{

@@ -517,6 +517,7 @@ void ConditionalValue::transferValuesFloat(Bool *condition, Numeric *ifTrue, Num
 	out->setFloatValuesSlice(slice, outValues);
 }
 
+/*
 void ConditionalValue::transferValuesVec3(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice){
 	std::vector<Imath::V3f> outValues;
 	conditionalValueTransfer<Imath::V3f>(condition->boolValueAtSlice(slice, 0), ifTrue->vec3ValuesSlice(slice), ifFalse->vec3ValuesSlice(slice), outValues);
@@ -534,7 +535,7 @@ void ConditionalValue::transferValuesMatrix44(Bool *condition, Numeric *ifTrue, 
 	conditionalValueTransfer<Imath::M44f>(condition->boolValueAtSlice(slice, 0), ifTrue->matrix44ValuesSlice(slice), ifFalse->matrix44ValuesSlice(slice), outValues);
 	out->setMatrix44ValuesSlice(slice, outValues);
 }
-
+*/
 void ConditionalValue::transferValuesIntBoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice){
 	std::vector<int> outValues;
 	conditionalValueTransferBoolArray<int>(condition->boolValuesSlice(slice), ifTrue->intValuesSlice(slice), ifFalse->intValuesSlice(slice), outValues);
@@ -545,24 +546,6 @@ void ConditionalValue::transferValuesFloatBoolArray(Bool *condition, Numeric *if
 	std::vector<float> outValues;
 	conditionalValueTransferBoolArray<float>(condition->boolValuesSlice(slice), ifTrue->floatValuesSlice(slice), ifFalse->floatValuesSlice(slice), outValues);
 	out->setFloatValuesSlice(slice, outValues);
-}
-
-void ConditionalValue::transferValuesVec3BoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice){
-	std::vector<Imath::V3f> outValues;
-	conditionalValueTransferBoolArray<Imath::V3f>(condition->boolValuesSlice(slice), ifTrue->vec3ValuesSlice(slice), ifFalse->vec3ValuesSlice(slice), outValues);
-	out->setVec3ValuesSlice(slice, outValues);
-}
-
-void ConditionalValue::transferValuesCol4BoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice){
-	std::vector<Imath::Color4f> outValues;
-	conditionalValueTransferBoolArray<Imath::Color4f>(condition->boolValuesSlice(slice), ifTrue->col4ValuesSlice(slice), ifFalse->col4ValuesSlice(slice), outValues);
-	out->setCol4ValuesSlice(slice, outValues);
-}
-
-void ConditionalValue::transferValuesMatrix44BoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice){
-	std::vector<Imath::M44f> outValues;
-	conditionalValueTransferBoolArray<Imath::M44f>(condition->boolValuesSlice(slice), ifTrue->matrix44ValuesSlice(slice), ifFalse->matrix44ValuesSlice(slice), outValues);
-	out->setMatrix44ValuesSlice(slice, outValues);
 }
 
 void ConditionalValue::attributeSpecializationChanged(Attribute *attribute){
@@ -577,6 +560,7 @@ void ConditionalValue::attributeSpecializationChanged(Attribute *attribute){
 			else if(type == Numeric::numericTypeFloat || type == Numeric::numericTypeFloatArray){
 				_selectedOperation = &ConditionalValue::transferValuesFloat;
 			}
+            /*
 			else if(type == Numeric::numericTypeVec3 || type == Numeric::numericTypeVec3Array){
 				_selectedOperation = &ConditionalValue::transferValuesVec3;
 			}
@@ -586,6 +570,7 @@ void ConditionalValue::attributeSpecializationChanged(Attribute *attribute){
 			else if(type == Numeric::numericTypeMatrix44 || type == Numeric::numericTypeMatrix44Array){
 				_selectedOperation = &ConditionalValue::transferValuesMatrix44;
 			}
+
 		}
 		else{
 			if(type == Numeric::numericTypeInt || type == Numeric::numericTypeIntArray){
@@ -603,6 +588,7 @@ void ConditionalValue::attributeSpecializationChanged(Attribute *attribute){
 			else if(type == Numeric::numericTypeMatrix44 || type == Numeric::numericTypeMatrix44Array){
 				_selectedOperation = &ConditionalValue::transferValuesMatrix44BoolArray;
 			}
+            */
 		}
 	}
 }

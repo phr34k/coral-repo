@@ -69,6 +69,7 @@ void LoopInputNode::attributeSpecializationChanged(Attribute *attribute){
 			else if(type == Numeric::numericTypeFloatArray){
 				_selectedOperation = &LoopInputNode::updateFloat;
 			}
+            /*
 			else if(type == Numeric::numericTypeVec3Array){
 				_selectedOperation = &LoopInputNode::updateVec3;
 			}
@@ -78,6 +79,7 @@ void LoopInputNode::attributeSpecializationChanged(Attribute *attribute){
 			else if(type == Numeric::numericTypeMatrix44Array){
 				_selectedOperation = &LoopInputNode::updateMatrix44;
 			}
+            */
 		}
 	}
 }
@@ -88,18 +90,6 @@ void LoopInputNode::updateInt(unsigned int slice, Numeric *globalArray, Numeric 
 
 void LoopInputNode::updateFloat(unsigned int slice, Numeric *globalArray, Numeric *localElement){
 	localElement->setFloatValueAtSlice(slice, 0, globalArray->floatValueAtSlice(0, slice));
-}
-
-void LoopInputNode::updateVec3(unsigned int slice, Numeric *globalArray, Numeric *localElement){
-	localElement->setVec3ValueAtSlice(slice, 0, globalArray->vec3ValueAtSlice(0, slice));
-}
-
-void LoopInputNode::updateCol4(unsigned int slice, Numeric *globalArray, Numeric *localElement){
-	localElement->setCol4ValueAtSlice(slice, 0, globalArray->col4ValueAtSlice(0, slice));
-}
-
-void LoopInputNode::updateMatrix44(unsigned int slice, Numeric *globalArray, Numeric *localElement){
-	localElement->setMatrix44ValueAtSlice(slice, 0, globalArray->matrix44ValueAtSlice(0, slice));
 }
 
 void LoopInputNode::updateSlice(Attribute *attribute, unsigned int slice){
@@ -171,6 +161,7 @@ void LoopOutputNode::attributeSpecializationChanged(Attribute *attribute){
 			else if(type == Numeric::numericTypeFloatArray){
 				_selectedOperation = &LoopOutputNode::updateFloat;
 			}
+            /*
 			else if(type == Numeric::numericTypeVec3Array){
 				_selectedOperation = &LoopOutputNode::updateVec3;
 			}
@@ -180,6 +171,7 @@ void LoopOutputNode::attributeSpecializationChanged(Attribute *attribute){
 			else if(type == Numeric::numericTypeMatrix44Array){
 				_selectedOperation = &LoopOutputNode::updateMatrix44;
 			}
+            */
 		}
 	}
 }
@@ -193,24 +185,6 @@ void LoopOutputNode::updateInt(unsigned int slices, Numeric *element, Numeric *a
 void LoopOutputNode::updateFloat(unsigned int slices, Numeric *element, Numeric *array){
 	for(int i = 0; i < slices; ++i){
 		array->setFloatValueAtSlice(0, i, element->floatValueAtSlice(i, 0));
-	}
-}
-
-void LoopOutputNode::updateVec3(unsigned int slices, Numeric *element, Numeric *array){
-	for(int i = 0; i < slices; ++i){
-		array->setVec3ValueAtSlice(0, i, element->vec3ValueAtSlice(i, 0));
-	}
-}
-
-void LoopOutputNode::updateCol4(unsigned int slices, Numeric *element, Numeric *array){
-	for(int i = 0; i < slices; ++i){
-		array->setCol4ValueAtSlice(0, i, element->col4ValueAtSlice(i, 0));
-	}
-}
-
-void LoopOutputNode::updateMatrix44(unsigned int slices, Numeric *element, Numeric *array){
-	for(int i = 0; i < slices; ++i){
-		array->setMatrix44ValueAtSlice(0, i, element->matrix44ValueAtSlice(i, 0));
 	}
 }
 

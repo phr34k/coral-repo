@@ -46,6 +46,7 @@ Numeric::Numeric():
 	_floatValuesSliced[0].resize(1);
 	_floatValuesSliced[0][0] = 0.0;
 
+    /*
 	_vec3ValuesSliced.resize(1);
 	_vec3ValuesSliced[0].resize(1);
 	_vec3ValuesSliced[0][0] = Imath::V3f(0.0, 0.0, 0.0);
@@ -59,8 +60,10 @@ Numeric::Numeric():
 	_matrix44ValuesSliced[0][0] = Imath::identity44f;
 
 	_col4ValuesSliced.resize(1);
-	_col4ValuesSliced[0].resize(1);
+	_col4ValuesSliced[0].resize(1
+    );
 	_col4ValuesSliced[0][0] = Imath::Color4f(1.0, 1.0, 1.0, 1.0);
+    */
 }
 
 void Numeric::copy(const Value *other){
@@ -72,10 +75,10 @@ void Numeric::copy(const Value *other){
 
 		_intValuesSliced = otherNum->_intValuesSliced;
 		_floatValuesSliced = otherNum->_floatValuesSliced;
-		_vec3ValuesSliced = otherNum->_vec3ValuesSliced;
-		_quatValuesSliced = otherNum->_quatValuesSliced;
-		_matrix44ValuesSliced = otherNum->_matrix44ValuesSliced;
-		_col4ValuesSliced = otherNum->_col4ValuesSliced;
+        //_vec3ValuesSliced = otherNum->_vec3ValuesSliced;
+        //_quatValuesSliced = otherNum->_quatValuesSliced;
+        //_matrix44ValuesSliced = otherNum->_matrix44ValuesSliced;
+		//_col4ValuesSliced = otherNum->_col4ValuesSliced;
 	}
 }
 
@@ -101,6 +104,7 @@ unsigned int Numeric::sizeSlice(unsigned int slice){
 	else if(_type == numericTypeFloatArray || _type == numericTypeFloat){
 		return _floatValuesSliced[slice].size();
 	}
+    /*
 	else if(_type == numericTypeVec3Array || _type == numericTypeVec3){
 		return _vec3ValuesSliced[slice].size();
 	}
@@ -113,6 +117,7 @@ unsigned int Numeric::sizeSlice(unsigned int slice){
 	else if(_type == numericTypeCol4Array || _type == numericTypeCol4){
 		return _col4ValuesSliced[slice].size();
 	}
+    */
 
 	return 0;
 }
@@ -145,6 +150,7 @@ void Numeric::setType(Numeric::Type type){
 		_floatValuesSliced.resize(_slices);
 		_isArray = true;
 	}
+    /*
 	else if(type == numericTypeVec3){
 		_vec3ValuesSliced.resize(_slices);
 		for(int i = 0; i < _slices; ++i){
@@ -181,10 +187,13 @@ void Numeric::setType(Numeric::Type type){
 			_col4ValuesSliced[i].resize(1);
 		}
 	}
+    */
+    /*
 	else if(type == numericTypeCol4Array){
 		_col4ValuesSliced.resize(_slices);
 		_isArray = true;
 	}
+    */
 }
 
 void Numeric::resize(unsigned int newSize){
@@ -203,6 +212,7 @@ void Numeric::resizeSlice(unsigned int slice, unsigned int newSize){
 				_floatValuesSliced[i].resize(newSize);
 			}
 		}
+        /*
 		else if(_type == numericTypeVec3 || _type == numericTypeVec3Array){
 			for(int i = 0; i < _vec3ValuesSliced.size(); ++i){
 				_vec3ValuesSliced[i].resize(newSize);
@@ -213,16 +223,21 @@ void Numeric::resizeSlice(unsigned int slice, unsigned int newSize){
 				_quatValuesSliced[i].resize(newSize);
 			}
 		}
+        */
+        /*
 		else if(_type == numericTypeMatrix44 || _type == numericTypeMatrix44Array){
 			for(int i = 0; i < _matrix44ValuesSliced.size(); ++i){
 				_matrix44ValuesSliced[i].resize(newSize);
 			}
 		}
+        */
+        /*
 		else if(_type == numericTypeCol4 || _type == numericTypeCol4Array){
 			for(int i = 0; i < _col4ValuesSliced.size(); ++i){
 				_col4ValuesSliced[i].resize(newSize);
 			}
 		}
+        */
 	}
 }
 
@@ -231,11 +246,11 @@ bool Numeric::isArrayType(Numeric::Type type){
 	bool arrayType = false;
 	if(
 		type == numericTypeIntArray ||
-		type == numericTypeFloatArray ||
+		type == numericTypeFloatArray /*||
 		type == numericTypeVec3Array ||
 		type == numericTypeQuatArray ||
 		type == numericTypeMatrix44Array ||
-		type == numericTypeCol4Array){
+		type == numericTypeCol4Array*/){
 		
 		arrayType = true;
 	}
@@ -251,10 +266,13 @@ void Numeric::setFloatValueAt(unsigned int id, float value){
 	setFloatValueAtSlice(0, id, value);
 }
 
+/*
 void Numeric::setVec3ValueAt(unsigned int id, const Imath::V3f &value){
 	setVec3ValueAtSlice(0, id, value);
 }
+*/
 
+/*
 void Numeric::setCol4ValueAt(unsigned int id, const Imath::Color4f &value){
 	setCol4ValueAtSlice(0, id, value);
 }
@@ -266,7 +284,7 @@ void Numeric::setQuatValueAt(unsigned int id, const Imath::Quatf &value){
 void Numeric::setMatrix44ValueAt(unsigned int id, const Imath::M44f &value){
 	setMatrix44ValueAtSlice(0, id, value);
 }
-
+*/
 const std::vector<int> &Numeric::intValues(){
 	return _intValuesSliced[0];
 }
@@ -275,6 +293,7 @@ const std::vector<float> &Numeric::floatValues(){
 	return _floatValuesSliced[0];
 }
 
+/*
 const std::vector<Imath::V3f> &Numeric::vec3Values(){
 	return _vec3ValuesSliced[0];
 }
@@ -290,6 +309,7 @@ const std::vector<Imath::Quatf> &Numeric::quatValues(){
 const std::vector<Imath::M44f> &Numeric::matrix44Values(){
 	return _matrix44ValuesSliced[0];
 }
+*/
 
 int Numeric::intValueAt(unsigned int id){
 	return intValueAtSlice(0, id);
@@ -298,7 +318,7 @@ int Numeric::intValueAt(unsigned int id){
 float Numeric::floatValueAt(unsigned int id){
 	return floatValueAtSlice(0, id);
 }
-
+/*
 Imath::V3f Numeric::vec3ValueAt(unsigned int id){
 	return vec3ValueAtSlice(0, id);
 }
@@ -314,6 +334,7 @@ Imath::Quatf Numeric::quatValueAt(unsigned int id){
 Imath::M44f Numeric::matrix44ValueAt(unsigned int id){
 	return matrix44ValueAtSlice(0, id);
 }
+*/
 
 void Numeric::setIntValues(const std::vector<int> &values){
 	setIntValuesSlice(0, values);
@@ -323,6 +344,7 @@ void Numeric::setFloatValues(const std::vector<float> &values){
 	setFloatValuesSlice(0, values);
 }
 
+/*
 void Numeric::setVec3Values(const std::vector<Imath::V3f> &values){
 	setVec3ValuesSlice(0, values);
 }
@@ -338,6 +360,7 @@ void Numeric::setQuatValues(const std::vector<Imath::Quatf> &values){
 void Numeric::setMatrix44Values(const std::vector<Imath::M44f> &values){
 	setMatrix44ValuesSlice(0, values);
 }
+*/
 
 std::string Numeric::sliceAsString(unsigned int slice){
 	std::string script;
@@ -373,6 +396,7 @@ std::string Numeric::sliceAsString(unsigned int slice){
 					stream << "\n";
 			}
 		}
+        /*
 		else if(_type == numericTypeVec3 || _type == numericTypeVec3Array){
 			for(int i = 0; i < _vec3ValuesSliced[slice].size(); ++i){
 				stream << "(";
@@ -426,6 +450,7 @@ std::string Numeric::sliceAsString(unsigned int slice){
 					stream << "\n";
 			}
 		}
+        /*
 		else if(_type == numericTypeMatrix44 || _type == numericTypeMatrix44Array){
 			for(int i = 0; i < _matrix44ValuesSliced[slice].size(); ++i){
 				stream << "(";
@@ -456,6 +481,7 @@ std::string Numeric::sliceAsString(unsigned int slice){
 					stream << "\n";
 			}
 		}
+        */
 		
 		std::ostringstream type;
 		type << _type;
@@ -501,6 +527,7 @@ void Numeric::setFromString(const std::string &value){
 				_floatValuesSliced[0].push_back(value);
 			}
 		}
+        /*
 		else if(type == Numeric::numericTypeVec3 || type == Numeric::numericTypeVec3Array){
 			_vec3ValuesSliced.resize(1);
 			_vec3ValuesSliced[0].clear();
@@ -523,6 +550,8 @@ void Numeric::setFromString(const std::string &value){
 				}
 			}
 		}
+        */
+        /*
 		else if(type == Numeric::numericTypeQuat || type == Numeric::numericTypeQuatArray){
 			_quatValuesSliced.resize(1);
 			_quatValuesSliced[0].clear();
@@ -546,6 +575,8 @@ void Numeric::setFromString(const std::string &value){
 				}
 			}
 		}
+        */
+        /*
 		else if(type == Numeric::numericTypeMatrix44 || type == Numeric::numericTypeMatrix44Array){
 			_matrix44ValuesSliced.resize(1);
 			_matrix44ValuesSliced[0].clear();
@@ -569,6 +600,8 @@ void Numeric::setFromString(const std::string &value){
 				}
 			}
 		}
+        */
+        /*
 		else if(type == Numeric::numericTypeCol4 || type == Numeric::numericTypeCol4Array){
 			_col4ValuesSliced.resize(1);
 			_col4ValuesSliced[0].clear();
@@ -592,6 +625,7 @@ void Numeric::setFromString(const std::string &value){
 				}
 			}
 		}
+        */
 	}
 }
 
@@ -613,6 +647,7 @@ void Numeric::setFloatValueAtSlice(unsigned int slice, unsigned int id, float va
 	}
 }
 
+/*
 void Numeric::setVec3ValueAtSlice(unsigned int slice, unsigned int id, const Imath::V3f &value){
 	if(slice < _vec3ValuesSliced.size()){
 		std::vector<Imath::V3f> &slicevec = _vec3ValuesSliced[slice];
@@ -648,6 +683,7 @@ void Numeric::setQuatValueAtSlice(unsigned int slice, unsigned int id, const Ima
 		}
 	}
 }
+*/
 
 int Numeric::intValueAtSlice(unsigned int slice, unsigned int id){
 	if(slice >= _intValuesSliced.size()){
@@ -685,6 +721,7 @@ float Numeric::floatValueAtSlice(unsigned int slice, unsigned int id){
 	return 0.0;
 }
 
+/*
 Imath::V3f Numeric::vec3ValueAtSlice(unsigned int slice, unsigned int id){
 	if(slice >= _vec3ValuesSliced.size()){
 		slice = _vec3ValuesSliced.size() - 1;
@@ -756,6 +793,7 @@ Imath::M44f Numeric::matrix44ValueAtSlice(unsigned int slice, unsigned int id){
 	
 	return Imath::identity44f;
 }
+*/
 
 void Numeric::setIntValuesSlice(unsigned int slice, const std::vector<int> &values){
 	if(slice < _intValuesSliced.size()){
@@ -769,6 +807,7 @@ void Numeric::setFloatValuesSlice(unsigned int slice, const std::vector<float> &
 	}
 }
 
+/*
 void Numeric::setVec3ValuesSlice(unsigned int slice, const std::vector<Imath::V3f> &values){
 	if(slice < _vec3ValuesSliced.size()){
 		_vec3ValuesSliced[slice] = values;
@@ -792,6 +831,7 @@ void Numeric::setMatrix44ValuesSlice(unsigned int slice, const std::vector<Imath
 		_matrix44ValuesSliced[slice] = values;
 	}
 }
+*/
 
 const std::vector<int> &Numeric::intValuesSlice(unsigned int slice){
 	if(slice >= _intValuesSliced.size()){
@@ -809,6 +849,7 @@ const std::vector<float> &Numeric::floatValuesSlice(unsigned int slice){
 	return _floatValuesSliced[slice];
 }
 
+/*
 const std::vector<Imath::V3f> &Numeric::vec3ValuesSlice(unsigned int slice){
 	if(slice >= _vec3ValuesSliced.size()){
 		slice = _vec3ValuesSliced.size() - 1;
@@ -817,6 +858,7 @@ const std::vector<Imath::V3f> &Numeric::vec3ValuesSlice(unsigned int slice){
 	return _vec3ValuesSliced[slice];
 }
 
+/*
 const std::vector<Imath::Color4f> &Numeric::col4ValuesSlice(unsigned int slice){
 	if(slice >= _col4ValuesSliced.size()){
 		slice = _col4ValuesSliced.size() - 1;
@@ -840,6 +882,7 @@ const std::vector<Imath::M44f> &Numeric::matrix44ValuesSlice(unsigned int slice)
 
 	return _matrix44ValuesSliced[slice];
 }
+*/
 
 void Numeric::resizeSlices(unsigned int slices){
 	if(slices == 0){
@@ -871,6 +914,7 @@ void Numeric::resizeSlices(unsigned int slices){
 		else if(_type == numericTypeFloatArray){
 			_floatValuesSliced.resize(slices);
 		}
+        /*
 		else if(_type == numericTypeVec3){
 			_vec3ValuesSliced.resize(slices);
 			for(int i = 0; i < slices; ++i){
@@ -892,6 +936,7 @@ void Numeric::resizeSlices(unsigned int slices){
 				}
 			}
 		}
+        /*
 		else if(_type == numericTypeQuatArray){
 			_quatValuesSliced.resize(slices);
 		}
@@ -904,6 +949,7 @@ void Numeric::resizeSlices(unsigned int slices){
 				}
 			}
 		}
+
 		else if(_type == numericTypeMatrix44Array){
 			_matrix44ValuesSliced.resize(slices);
 		}
@@ -919,6 +965,7 @@ void Numeric::resizeSlices(unsigned int slices){
 		else if(_type == numericTypeCol4Array){
 			_col4ValuesSliced.resize(slices);
 		}
+        */
 
 		_slices = slices;
 	}

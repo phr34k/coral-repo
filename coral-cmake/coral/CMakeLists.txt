@@ -11,5 +11,6 @@ target_include_directories(coral PRIVATE "D:/Workspaces/Aurora/Thirdparty/freeim
 target_include_directories(coral PRIVATE "D:/Workspaces/Aurora/Thirdparty/freeimage/Source/OpenEXR/Half" )
 target_include_directories(coral PRIVATE "D:/Workspaces/Aurora/Thirdparty/freeimage/Source/OpenEXR/" )
 target_include_directories(coral PRIVATE "D:/Workspaces/coral-repo/oiio/src/include" )
+target_include_directories(coral PRIVATE "D:/SDK/pyhton27/include" )
 target_include_directories(coral PRIVATE "D:/Workspaces/coral-repo/coral-cmake/imath/ImathPythonWrapper/" )
 target_compile_definitions(coral PRIVATE )

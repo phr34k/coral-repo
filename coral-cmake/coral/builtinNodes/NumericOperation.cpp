@@ -37,13 +37,14 @@ namespace{
 	Numeric::Type numeric_type_int_array = Numeric::numericTypeIntArray;
 	Numeric::Type numeric_type_float = Numeric::numericTypeFloat;
 	Numeric::Type numeric_type_float_array = Numeric::numericTypeFloatArray;
+    /*
 	Numeric::Type numeric_type_vec3 = Numeric::numericTypeVec3;
 	Numeric::Type numeric_type_vec3_array = Numeric::numericTypeVec3Array;
 	Numeric::Type numeric_type_col4 = Numeric::numericTypeCol4;
 	Numeric::Type numeric_type_col4_array = Numeric::numericTypeCol4Array;
 	Numeric::Type numeric_type_matrix44 = Numeric::numericTypeMatrix44;
 	Numeric::Type numeric_type_matrix44_array = Numeric::numericTypeMatrix44Array;
-
+    */
 	template<class type>
 	unsigned int getSliceInBounds(std::vector<std::vector<type> > &vec, unsigned int slice){
 		unsigned int size = vec.size();
@@ -112,42 +113,42 @@ bool NumericOperation::allowOperation(Operation operation, Numeric::Type typeA, 
 		ALLOW_NUMERIC_OPERATION(int, float);
 		ALLOW_NUMERIC_OPERATION(float, float);
 		ALLOW_NUMERIC_OPERATION(float, int);
-		ALLOW_NUMERIC_OPERATION(vec3, vec3);
-		ALLOW_NUMERIC_OPERATION(col4, col4);
+		//ALLOW_NUMERIC_OPERATION(vec3, vec3);
+		//ALLOW_NUMERIC_OPERATION(col4, col4);
 	}
 	else if(operation == numericOperationSub){
 		ALLOW_NUMERIC_OPERATION(int, int);
 		ALLOW_NUMERIC_OPERATION(int, float);
 		ALLOW_NUMERIC_OPERATION(float, float);
 		ALLOW_NUMERIC_OPERATION(float, int);
-		ALLOW_NUMERIC_OPERATION(vec3, vec3);
-		ALLOW_NUMERIC_OPERATION(col4, col4);
+		//ALLOW_NUMERIC_OPERATION(vec3, vec3);
+		//ALLOW_NUMERIC_OPERATION(col4, col4);
 	}
 	else if(operation == numericOperationMul){
 		ALLOW_NUMERIC_OPERATION(int, int);
 		ALLOW_NUMERIC_OPERATION(int, float);
 		ALLOW_NUMERIC_OPERATION(float, float);
 		ALLOW_NUMERIC_OPERATION(float, int);
-		ALLOW_NUMERIC_OPERATION(vec3, vec3);
-		ALLOW_NUMERIC_OPERATION(vec3, float);
-		ALLOW_NUMERIC_OPERATION(vec3, int);
-		ALLOW_NUMERIC_OPERATION(vec3, matrix44);
-		ALLOW_NUMERIC_OPERATION(col4, col4);
-		ALLOW_NUMERIC_OPERATION(col4, float);
-		ALLOW_NUMERIC_OPERATION(col4, int);
-		ALLOW_NUMERIC_OPERATION(matrix44, matrix44);
+		//ALLOW_NUMERIC_OPERATION(vec3, vec3);
+		//ALLOW_NUMERIC_OPERATION(vec3, float);
+        //ALLOW_NUMERIC_OPERATION(vec3, int);
+        //ALLOW_NUMERIC_OPERATION(vec3, matrix44);
+		//ALLOW_NUMERIC_OPERATION(col4, col4);
+        //ALLOW_NUMERIC_OPERATION(col4, float);
+        //ALLOW_NUMERIC_OPERATION(col4, int);
+        //ALLOW_NUMERIC_OPERATION(matrix44, matrix44);
 	}
 	else if(operation == numericOperationDiv){
 		ALLOW_NUMERIC_OPERATION(int, int);
 		ALLOW_NUMERIC_OPERATION(int, float);
 		ALLOW_NUMERIC_OPERATION(float, float);
 		ALLOW_NUMERIC_OPERATION(float, int);
-		ALLOW_NUMERIC_OPERATION(vec3, vec3);
-		ALLOW_NUMERIC_OPERATION(vec3, float);
-		ALLOW_NUMERIC_OPERATION(vec3, int);
-		ALLOW_NUMERIC_OPERATION(col4, col4);
-		ALLOW_NUMERIC_OPERATION(col4, float);
-		ALLOW_NUMERIC_OPERATION(col4, int);
+        //ALLOW_NUMERIC_OPERATION(vec3, vec3);
+        //ALLOW_NUMERIC_OPERATION(vec3, float);
+        //ALLOW_NUMERIC_OPERATION(vec3, int);
+        //ALLOW_NUMERIC_OPERATION(col4, col4);
+        //ALLOW_NUMERIC_OPERATION(col4, float);
+        //ALLOW_NUMERIC_OPERATION(col4, int);
 	}
 	
 	return false;
@@ -158,51 +159,51 @@ void NumericOperation::selectOperands(Numeric::Type typeA, Numeric::Type typeB){
 		if(typeB == Numeric::numericTypeAny){
 			SELECT_PASSTRHOUGH_OPERATION(int);
 			SELECT_PASSTRHOUGH_OPERATION(float);
-			SELECT_PASSTRHOUGH_OPERATION(vec3);
-			SELECT_PASSTRHOUGH_OPERATION(col4);
-			SELECT_PASSTRHOUGH_OPERATION(matrix44);
+            //SELECT_PASSTRHOUGH_OPERATION(vec3);
+			//SELECT_PASSTRHOUGH_OPERATION(col4);
+            //SELECT_PASSTRHOUGH_OPERATION(matrix44);
 		}
 		else if(_operation == NumericOperation::numericOperationAdd){
 			SELECT_NUMERIC_OPERATION(add, int, int);
 			SELECT_NUMERIC_OPERATION(add, int, float);
 			SELECT_NUMERIC_OPERATION(add, float, float);
 			SELECT_NUMERIC_OPERATION(add, float, int);
-			SELECT_NUMERIC_OPERATION(add, vec3, vec3);
-			SELECT_NUMERIC_OPERATION(add, col4, col4);
+            //SELECT_NUMERIC_OPERATION(add, vec3, vec3);
+            //SELECT_NUMERIC_OPERATION(add, col4, col4);
 		}
 		else if(_operation == NumericOperation::numericOperationSub){
 			SELECT_NUMERIC_OPERATION(sub, int, int);
 			SELECT_NUMERIC_OPERATION(sub, int, float);
 			SELECT_NUMERIC_OPERATION(sub, float, float);
 			SELECT_NUMERIC_OPERATION(sub, float, int);
-			SELECT_NUMERIC_OPERATION(sub, vec3, vec3);
-			SELECT_NUMERIC_OPERATION(sub, col4, col4);
+            //SELECT_NUMERIC_OPERATION(sub, vec3, vec3);
+			//SELECT_NUMERIC_OPERATION(sub, col4, col4);
 		}
 		else if(_operation == NumericOperation::numericOperationMul){
 			SELECT_NUMERIC_OPERATION(mul, int, int);
 			SELECT_NUMERIC_OPERATION(mul, int, float);
 			SELECT_NUMERIC_OPERATION(mul, float, float);
 			SELECT_NUMERIC_OPERATION(mul, float, int);
-			SELECT_NUMERIC_OPERATION(mul, vec3, vec3);
-			SELECT_NUMERIC_OPERATION(mul, vec3, float);
-			SELECT_NUMERIC_OPERATION(mul, vec3, int);
-			SELECT_NUMERIC_OPERATION(mul, vec3, matrix44);
-			SELECT_NUMERIC_OPERATION(mul, col4, col4);
-			SELECT_NUMERIC_OPERATION(mul, col4, float);
-			SELECT_NUMERIC_OPERATION(mul, col4, int);
-			SELECT_NUMERIC_OPERATION(mul, matrix44, matrix44);
+            //SELECT_NUMERIC_OPERATION(mul, vec3, vec3);
+            //SELECT_NUMERIC_OPERATION(mul, vec3, float);
+            //SELECT_NUMERIC_OPERATION(mul, vec3, int);
+            //SELECT_NUMERIC_OPERATION(mul, vec3, matrix44);
+			//SELECT_NUMERIC_OPERATION(mul, col4, col4);
+            //SELECT_NUMERIC_OPERATION(mul, col4, float);
+            //SELECT_NUMERIC_OPERATION(mul, col4, int);
+            //SELECT_NUMERIC_OPERATION(mul, matrix44, matrix44);
 		}
 		else if(_operation == NumericOperation::numericOperationDiv){
 			SELECT_NUMERIC_OPERATION(div, int, int);
 			SELECT_NUMERIC_OPERATION(div, int, float);
 			SELECT_NUMERIC_OPERATION(div, float, float);
 			SELECT_NUMERIC_OPERATION(div, float, int);
-			SELECT_NUMERIC_OPERATION(div, vec3, vec3);
-			SELECT_NUMERIC_OPERATION(div, vec3, float);
-			SELECT_NUMERIC_OPERATION(div, vec3, int);
-			SELECT_NUMERIC_OPERATION(div, col4, col4);
-			SELECT_NUMERIC_OPERATION(div, col4, float);
-			SELECT_NUMERIC_OPERATION(div, col4, int);
+            //SELECT_NUMERIC_OPERATION(div, vec3, vec3);
+            //SELECT_NUMERIC_OPERATION(div, vec3, float);
+            //SELECT_NUMERIC_OPERATION(div, vec3, int);
+			//SELECT_NUMERIC_OPERATION(div, col4, col4);
+            //SELECT_NUMERIC_OPERATION(div, col4, float);
+            //SELECT_NUMERIC_OPERATION(div, col4, int);
 		}
 	}
 }
@@ -217,42 +218,42 @@ DEFINE_NUMERIC_OPERATION(add, int, int);
 DEFINE_NUMERIC_OPERATION(add, int, float);
 DEFINE_NUMERIC_OPERATION(add, float, float);
 DEFINE_NUMERIC_OPERATION(add, float, int);
-DEFINE_NUMERIC_OPERATION(add, vec3, vec3);
-DEFINE_NUMERIC_OPERATION(add, col4, col4);
+//DEFINE_NUMERIC_OPERATION(add, vec3, vec3);
+//DEFINE_NUMERIC_OPERATION(add, col4, col4);
 
 DEFINE_NUMERIC_OPERATION(sub, int, int);
 DEFINE_NUMERIC_OPERATION(sub, int, float);
 DEFINE_NUMERIC_OPERATION(sub, float, float);
 DEFINE_NUMERIC_OPERATION(sub, float, int);
-DEFINE_NUMERIC_OPERATION(sub, vec3, vec3);
-DEFINE_NUMERIC_OPERATION(sub, col4, col4);
+//DEFINE_NUMERIC_OPERATION(sub, vec3, vec3);
+//DEFINE_NUMERIC_OPERATION(sub, col4, col4);
 
 DEFINE_NUMERIC_OPERATION(mul, int, int);
 DEFINE_NUMERIC_OPERATION(mul, int, float);
 DEFINE_NUMERIC_OPERATION(mul, float, float);
 DEFINE_NUMERIC_OPERATION(mul, float, int);
-DEFINE_NUMERIC_OPERATION(mul, vec3, vec3);
-DEFINE_NUMERIC_OPERATION(mul, vec3, float);
-DEFINE_NUMERIC_OPERATION(mul, vec3, int);
-DEFINE_NUMERIC_OPERATION(mul, vec3, matrix44);
-DEFINE_NUMERIC_OPERATION(mul, col4, col4);
-DEFINE_NUMERIC_OPERATION(mul, col4, float);
-DEFINE_NUMERIC_OPERATION(mul, col4, int);
-DEFINE_NUMERIC_OPERATION(mul, matrix44, matrix44);
+//DEFINE_NUMERIC_OPERATION(mul, vec3, vec3);
+//DEFINE_NUMERIC_OPERATION(mul, vec3, float);
+//DEFINE_NUMERIC_OPERATION(mul, vec3, int);
+//DEFINE_NUMERIC_OPERATION(mul, vec3, matrix44);
+//DEFINE_NUMERIC_OPERATION(mul, col4, col4);
+//DEFINE_NUMERIC_OPERATION(mul, col4, float);
+//DEFINE_NUMERIC_OPERATION(mul, col4, int);
+//DEFINE_NUMERIC_OPERATION(mul, matrix44, matrix44);
 
 DEFINE_NUMERIC_OPERATION(div, int, int);
 DEFINE_NUMERIC_OPERATION(div, int, float);
 DEFINE_NUMERIC_OPERATION(div, float, float);
 DEFINE_NUMERIC_OPERATION(div, float, int);
-DEFINE_NUMERIC_OPERATION(div, vec3, vec3);
-DEFINE_NUMERIC_OPERATION(div, vec3, float);
-DEFINE_NUMERIC_OPERATION(div, vec3, int);
-DEFINE_NUMERIC_OPERATION(div, col4, col4);
-DEFINE_NUMERIC_OPERATION(div, col4, float);
-DEFINE_NUMERIC_OPERATION(div, col4, int);
+//DEFINE_NUMERIC_OPERATION(div, vec3, vec3);
+//DEFINE_NUMERIC_OPERATION(div, vec3, float);
+//DEFINE_NUMERIC_OPERATION(div, vec3, int);
+//DEFINE_NUMERIC_OPERATION(div, col4, col4);
+//DEFINE_NUMERIC_OPERATION(div, col4, float);
+//DEFINE_NUMERIC_OPERATION(div, col4, int);
 
 DEFINE_PASSTRHOUGH_OPERATION(int);
 DEFINE_PASSTRHOUGH_OPERATION(float);
-DEFINE_PASSTRHOUGH_OPERATION(vec3);
-DEFINE_PASSTRHOUGH_OPERATION(col4);
-DEFINE_PASSTRHOUGH_OPERATION(matrix44);
+//DEFINE_PASSTRHOUGH_OPERATION(vec3);
+//DEFINE_PASSTRHOUGH_OPERATION(col4);
+//DEFINE_PASSTRHOUGH_OPERATION(matrix44);

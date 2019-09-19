@@ -113,15 +113,15 @@ private:
 	
 	void transferValuesInt(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
 	void transferValuesFloat(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
-	void transferValuesVec3(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
-	void transferValuesCol4(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
-	void transferValuesMatrix44(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
+    //void transferValuesVec3(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
+    //void transferValuesCol4(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
+	//void transferValuesMatrix44(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
 	
 	void transferValuesIntBoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
 	void transferValuesFloatBoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
-	void transferValuesVec3BoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
-	void transferValuesCol4BoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
-	void transferValuesMatrix44BoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
+    //void transferValuesVec3BoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
+    //void transferValuesCol4BoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
+	//void transferValuesMatrix44BoolArray(Bool *condition, Numeric *ifTrue, Numeric *ifFalse, Numeric *out, unsigned int slice);
 };
 
 // greater than function

@@ -217,6 +217,7 @@ void SplinePoint::pointOnCatmull(float param, const std::vector<Imath::V3f> &cvs
 }
 
 void SplinePoint::updateArray(){
+    /*
 	const std::vector<float> &params = _param->value()->floatValues();
 	const std::vector<Imath::V3f> &cvs = _controlPoints->value()->vec3Values();
 	
@@ -248,9 +249,11 @@ void SplinePoint::updateArray(){
 	}
 
 	_pointOnCurve->outValue()->setVec3Values(pointsOnCurve);
+    */
 }
 
 void SplinePoint::updateSingle(){
+    /*
 	int curveType = _curveType->value()->currentIndex();
 	const std::vector<Imath::V3f> &cvs = _controlPoints->value()->vec3Values();
 	float param = _param->value()->floatValueAt(0);
@@ -276,6 +279,7 @@ void SplinePoint::updateSingle(){
 	}
 
 	_pointOnCurve->outValue()->setVec3ValueAt(0, pointOnCurve);
+    */
 }
 
 void SplinePoint::updateKnots(){
